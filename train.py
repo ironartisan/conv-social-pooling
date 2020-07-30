@@ -114,7 +114,10 @@ for epoch_num in range(pretrainEpochs+trainEpochs):
 
         if i%100 == 99:
             eta = avg_tr_time/100*(len(trSet)/batch_size-i)
-            print("Epoch no:",epoch_num+1,"| Epoch progress(%):",format(i/(len(trSet)/batch_size)*100,'0.2f'), "| Avg train loss:",format(avg_tr_loss/100,'0.4f'),"| Acc:",format(avg_lat_acc,'0.4f'),format(avg_lon_acc,'0.4f'), "| Validation loss prev epoch",format(prev_val_loss,'0.4f'), "| ETA(s):",int(eta))
+            print("Epoch no:",epoch_num+1,"| Epoch progress(%):",format(i/(len(trSet)/batch_size)*100,'0.2f'),
+                  "| Avg train loss:",format(avg_tr_loss/100,'0.4f'),"| Acc:",format(avg_lat_acc,'0.4f'),
+                  format(avg_lon_acc,'0.4f'), "| Validation loss prev epoch",format(prev_val_loss,'0.4f'),
+                  "| ETA(s):",int(eta))
             train_loss.append(avg_tr_loss/100)
             avg_tr_loss = 0
             avg_lat_acc = 0

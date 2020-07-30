@@ -22,6 +22,7 @@ class highwayNet(nn.Module):
         # Flag for train mode (True) vs test-mode (False)
         self.train_flag = args['train_flag']
 
+
         ## Sizes of network layers
         self.encoder_size = args['encoder_size']
         self.decoder_size = args['decoder_size']
@@ -35,6 +36,20 @@ class highwayNet(nn.Module):
         self.num_lat_classes = args['num_lat_classes']
         self.num_lon_classes = args['num_lon_classes']
         self.soc_embedding_size = (((args['grid_size'][0]-4)+1)//2)*self.conv_3x1_depth
+        """
+        args['encoder_size'] = 64
+        args['decoder_size'] = 128
+        args['in_length'] = 16
+        args['out_length'] = 25
+        args['grid_size'] = (13,3)
+        args['soc_conv_depth'] = 64
+        args['conv_3x1_depth'] = 16
+        args['dyn_embedding_size'] = 32
+        args['input_embedding_size'] = 32
+        args['num_lat_classes'] = 3
+        args['num_lon_classes'] = 2
+        args['use_maneuvers'] = True`
+        """
 
         ## Define network weights
 
