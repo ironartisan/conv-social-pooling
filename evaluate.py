@@ -21,7 +21,7 @@ args['dyn_embedding_size'] = 32
 args['input_embedding_size'] = 32
 args['num_lat_classes'] = 3
 args['num_lon_classes'] = 2
-args['use_maneuvers'] = True
+args['use_maneuvers'] = False
 args['train_flag'] = False
 
 

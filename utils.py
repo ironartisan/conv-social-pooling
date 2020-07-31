@@ -11,7 +11,9 @@ class ngsimDataset(Dataset):
 
 
     def __init__(self, mat_file, t_h=30, t_f=50, d_s=2, enc_size = 64, grid_size = (13,3)):
+        # shape(2308910, 47)
         self.D = scp.loadmat(mat_file)['traj']
+        # shape(3, 2176)
         self.T = scp.loadmat(mat_file)['tracks']
         self.t_h = t_h  # length of track history
         self.t_f = t_f  # length of predicted trajectory

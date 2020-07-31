@@ -99,19 +99,24 @@ class highwayNet(nn.Module):
         nbrs_enc = nbrs_enc.view(nbrs_enc.shape[1], nbrs_enc.shape[2])
 
         ## Masked scatter
+        # mask  torch.Size([128, 3, 13, 64])
+        # nbrs_enc torch.Size([820, 64])
         soc_enc = torch.zeros_like(masks).float()
-        soc_enc = soc_enc.masked_scatter_(masks, nbrs_enc)
+        soc_enc = soc_enc.masked_scatter_(masks.bool(), nbrs_enc)
+        # soc_enc torch.Size([128, 3, 13, 64])
         soc_enc = soc_enc.permute(0,3,2,1)
-
+        # soc_enc shape  torch.Size([128, 64, 13, 3])
+        #
         ## Apply convolutional social pooling:
         soc_enc = self.soc_maxpool(self.leaky_relu(self.conv_3x1(self.leaky_relu(self.soc_conv(soc_enc)))))
+        # torch.Size([128, 16, 5, 1])
         soc_enc = soc_enc.view(-1,self.soc_embedding_size)
 
         ## Apply fc soc pooling
         # soc_enc = soc_enc.contiguous()
         # soc_enc = soc_enc.view(-1, self.soc_conv_depth * self.grid_size[0] * self.grid_size[1])
         # soc_enc = self.leaky_relu(self.soc_fc(soc_enc))
-
+        # soc_enc torch.Size([128, 80])   hist_enc torch.Size([128, 32])
         ## Concatenate encodings:
         enc = torch.cat((soc_enc,hist_enc),1)
 

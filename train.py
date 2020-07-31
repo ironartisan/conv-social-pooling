@@ -5,7 +5,9 @@ from utils import ngsimDataset,maskedNLL,maskedMSE,maskedNLLTest
 from torch.utils.data import DataLoader
 import time
 import math
+import warnings
 
+warnings.simplefilter("ignore", DeprecationWarning)
 
 ## Network Arguments
 args = {}
@@ -21,7 +23,7 @@ args['dyn_embedding_size'] = 32
 args['input_embedding_size'] = 32
 args['num_lat_classes'] = 3
 args['num_lon_classes'] = 2
-args['use_maneuvers'] = True
+args['use_maneuvers'] = False
 args['train_flag'] = True
 
 
@@ -33,8 +35,10 @@ if args['use_cuda']:
 
 
 ## Initialize optimizer
-pretrainEpochs = 5
-trainEpochs = 3
+# pretrainEpochs = 5
+# trainEpochs = 3
+pretrainEpochs = 1
+trainEpochs = 1
 optimizer = torch.optim.Adam(net.parameters())
 batch_size = 128
 crossEnt = torch.nn.BCELoss()
